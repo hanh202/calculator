@@ -11,9 +11,70 @@
 </head>
 <body>
 <div class="container">
+<?php
+	if(isset($_GET['display'])){
+		echo $_GET['display'];
+	}else{
+		echo '';
+	}
+?>
+	<form action="./index.php" method="get">
+		<h2>Calculator basic</h2>
+		<input type="number" name="numA">
+		<select name="oprator">
+			<option value="add" name="add">+</option>
+			<option value="minus" name="minus">-</option>
+			<option value="multiplication" name="multiplication">*</option>
+			<option value="division" name="division">/</option>
+		</select>
+		<input type="number" name="numB">
+		<br>
+		<input type="submit" value="result">
+		<br>
+		<p class="result">
+			<?php
+				$numA=isset($_GET['numA'])?(float)$_GET['numA']:'';
+				$numB=isset($_GET['numB'])?(float)$_GET['numA']:'';
+
+				// $numA=(float)$numA;
+				// $numB=(float)$numB;
+
+				echo $numA, $numB;
+
+				if($numA !='' && $numB !='' && isset($_GET['oprator'])){
+
+					$oprator=$_GET['oprator'];
+					switch ($oprator){
+						case 'add':
+							$result=$numA+$numB;
+							break;
+						case 'minus':
+							$result=$numA-$numB;
+							break;
+						case 'multiplication':
+							$result=$numA*$numB;
+							break;
+						case 'division':
+							$result=$numA/$numB;
+							break;
+						default:
+							break;
+					}
+
+					// echo $result;
+				}else{
+					echo "dang thieu thong tin, sua lai di nhe";
+				}
+			?>
+		</p>
+	</form>
+	
+
+
+
 	<fieldset id="container">
-		<form name="calculator">
-			<input id="display" type="text" name="display" readonly>
+		<form name="calculator" method="get" action="./index.php">
+			<input id="display" type="text" name="display" value="hanh" readonly>
 
 			<input class="button digits" type="button" value="7" >
 			<input class="button digits" type="button" value="8">
@@ -32,7 +93,7 @@
 			<br>
 			<input id="clearButton" class="button" type="button" value="C" >
 			<input class="button digits" type="button" value="0" >
-			<input class="button mathButtons" type="button" value="=">
+			<input class="button mathButtons" type="submit" value="=">
 			<input class="button mathButtons" type="button" value="/" >
 		</form>
 	</fieldset>
