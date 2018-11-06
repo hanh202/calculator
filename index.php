@@ -18,7 +18,7 @@
 		echo '';
 	}
 ?>
-	<form action="./index.php" method="get">
+	<form action="" method="get">
 		<h2>Calculator basic</h2>
 		<input type="number" name="numA">
 		<select name="oprator">
@@ -33,37 +33,21 @@
 		<br>
 		<p class="result">
 			<?php
-				$numA=isset($_GET['numA'])?(float)$_GET['numA']:'';
-				$numB=isset($_GET['numB'])?(float)$_GET['numA']:'';
 
-				// $numA=(float)$numA;
-				// $numB=(float)$numB;
-
-				echo $numA, $numB;
-
-				if($numA !='' && $numB !='' && isset($_GET['oprator'])){
-
-					$oprator=$_GET['oprator'];
-					switch ($oprator){
-						case 'add':
-							$result=$numA+$numB;
-							break;
-						case 'minus':
-							$result=$numA-$numB;
-							break;
-						case 'multiplication':
-							$result=$numA*$numB;
-							break;
-						case 'division':
-							$result=$numA/$numB;
-							break;
-						default:
-							break;
+				$numA=isset($_GET['numA'])?$_GET['numA']:'';
+				$numB=isset($_GET['numB'])?$_GET['numB']:'';
+				$oprator=isset($_GET['oprator'])?$_GET['oprator']:'';
+				if($numA!=='' && $numB !=='' && $oprator!==''){
+					echo "vao if";
+					if($oprator==='add'){
+						echo $numA+$numB;
+					}else if($oprator==='minus'){
+						echo $numA-$numB;
+					}else if($oprator==='multiplication'){
+						echo $numA*$numB;
+					}else if($oprator==='division'){
+						echo $numA/$numB;
 					}
-
-					// echo $result;
-				}else{
-					echo "dang thieu thong tin, sua lai di nhe";
 				}
 			?>
 		</p>
