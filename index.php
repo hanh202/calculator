@@ -54,9 +54,24 @@
 	</form>
 
     <?php
+        $arr=['++','--','**','//','*/','/*'];
         $bt=(isset($_GET['bieuThuc']))?$_GET['bieuThuc']:'';
         $result=(isset($_GET['result']))?$_GET['result']:'';
-        $result = eval('return '.$bt.';');
+
+        for($i=0;$i<count($arr);$i++){
+            if(strpos($bt,$arr[$i])) {
+                $error=true;
+            }
+        }
+        if($bt[0]==='*' || $bt[0]==='/' || $bt[-1]==='*' || $bt[-1]==='/'){
+            $error=true;
+        }
+
+        if(!$error) {
+            $result = eval('return ' . $bt . ';');
+        }else{
+            $result='syntax error';
+        }
     ?>
 
 
@@ -107,8 +122,8 @@
 
        $('input.button').on('click',function(){
            var value=$(this)[0].value;
-           if(value==='C'){
-               $('#bieuThuc').val('');
+           if(value === 'C'){
+               input = '';
            }else {
                input = input + value;
                $('#bieuThuc').val(input);
